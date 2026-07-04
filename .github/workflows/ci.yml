@@ -23,9 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Install cross build dependencies
+      - name: Configure armhf apt sources
         run: |
           sudo dpkg --add-architecture armhf
+          sudo awk '
+            /^Architectures:/ { next }
+            /^Types: deb$/ { print; print "Architectures: amd64"; next }
+            { print }
+          ' /etc/apt/sources.list.d/ubuntu.sources | sudo tee /etc/apt/sources.list.d/ubuntu.sources.new >/dev/null
+          sudo mv /etc/apt/sources.list.d/ubuntu.sources.new /etc/apt/sources.list.d/ubuntu.sources
+          cat <<'EOF' | sudo tee /etc/apt/sources.list.d/ubuntu-armhf.sources
+          Types: deb
+          URIs: http://ports.ubuntu.com/ubuntu-ports
+          Suites: noble noble-updates noble-backports noble-security
+          Components: main universe
+          Architectures: armhf
+          Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+          EOF
+      - name: Install cross build dependencies
+        run: |
           sudo apt-get update
           sudo apt-get install -y \
             autoconf automake build-essential curl g++-arm-linux-gnueabihf \
