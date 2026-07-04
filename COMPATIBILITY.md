@@ -14,9 +14,27 @@ The Kobo Clara family is expected to use the `kobo` target in current
 
 ## Device Test Status
 
-No physical Kobo device validation has been performed in this checkout. Do not
-claim a target as tested until the device checklist has been completed with the
-exact KOReader version, device model, and package artifact.
+### Kobo Clara Colour
+
+| Field | Value |
+| --- | --- |
+| Status | Physically verified |
+| Device model | Kobo Clara Colour |
+| KOReader version | Not recorded |
+| Target | `kobo` |
+| Package artifact | `koreader-mosh-0.1.0-kobo.zip` |
+| Package SHA-256 | `1ff37372706da0431a4e3f88f563730a721a0f2088c3033450814305342140fd` |
+| CI run | <https://github.com/jnordlund/koreader-mosh/actions/runs/28720011576> |
+
+Verified behavior:
+
+- `mosh user@host` starts a remote Mosh session from KOReader's terminal.
+- Host-key acceptance and both password-based and key-based login paths were
+  exercised through the launcher/`dbclient` startup flow.
+- Closing and reopening KOReader's terminal returns to the same running Mosh
+  session.
+- Kobo sleep/wake plus Wi-Fi reconnection resumes the same Mosh session without
+  new SSH authentication.
 
 Sleep/wake resume is a release blocker for supported devices. A target should
 not move from expected to tested until the same local `mosh-client` session has

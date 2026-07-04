@@ -3,28 +3,30 @@
 Record exact values. Do not mark an item passed unless it was tested on a
 physical Kobo.
 
-- Device model:
-- KOReader version:
-- KOReader install path:
+- Device model: Kobo Clara Colour
+- KOReader version: not recorded
+- KOReader install path: `/mnt/onboard/.adds/koreader`
 - Package artifact name and SHA-256:
-- Target used (`kobo`, `kobov4`, `kobov5`):
-- Plugin loads in KOReader:
-- Status screen shows launcher, `mosh-client`, terminfo and `dbclient` as ok:
-- Terminal shim installation:
-- `mosh user@example.com` password authentication:
-- `mosh --identity /mnt/onboard/ssh/id_dropbear user@example.com` key authentication:
-- Basic shell input and output:
-- Swedish UTF-8 characters `å`, `ä`, `ö`:
+  `koreader-mosh-0.1.0-kobo.zip`,
+  `1ff37372706da0431a4e3f88f563730a721a0f2088c3033450814305342140fd`
+- Target used (`kobo`, `kobov4`, `kobov5`): `kobo`
+- Plugin loads in KOReader: pass
+- Status screen shows launcher, `mosh-client`, terminfo and `dbclient` as ok: not recorded
+- Terminal shim installation: pass
+- `mosh user@example.com` password authentication: pass
+- `mosh --identity /mnt/onboard/ssh/id_dropbear user@example.com` key authentication: pass
+- Basic shell input and output: pass
+- Swedish UTF-8 characters `å`, `ä`, `ö`: not recorded
 - `tmux new-session -A -s kobo`:
 - tmux window switching:
 - `vim` or `nano`:
 - Ctrl-L repaint:
 - Terminal resize behavior:
 - Configured Mosh escape sequence:
-- Hide terminal with Close, reopen it, and confirm the same Mosh session is still active:
-- Wi-Fi interruption and reconnection without re-authentication:
-- Device sleep and wake resumes the same Mosh session without re-authentication:
-- Device sleep and wake while terminal view is closed but session is running:
+- Hide terminal with Close, reopen it, and confirm the same Mosh session is still active: pass
+- Wi-Fi interruption and reconnection without re-authentication: pass
+- Device sleep and wake resumes the same Mosh session without re-authentication: pass
+- Device sleep and wake while terminal view is closed but session is running: pass
 - Terminal Quit ends the local client and does not resume the same Mosh session:
 - Server UDP firewall failure:
 - Clean shutdown:
