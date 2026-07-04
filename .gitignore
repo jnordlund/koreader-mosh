@@ -1,0 +1,12 @@
+.DS_Store
+.cache/
+build/
+dist/
+__pycache__/
+*.pyc
+*.o
+*.so
+*.so.*
+*.a
+*.tar.gz
+*.zip

@@ -1,0 +1,63 @@
+#!/bin/sh
+set -eu
+
+log_dir="${FAKE_LOG_DIR:?FAKE_LOG_DIR is required}"
+mkdir -p "${log_dir}"
+
+{
+    for arg in "$@"; do
+        printf '[%s]\n' "$arg"
+    done
+} > "${log_dir}/dbclient.argv"
+
+if [ "${FAKE_STDERR:-}" ]; then
+    printf '%s\n' "${FAKE_STDERR}" >&2
+fi
+
+scenario="${FAKE_SCENARIO:-success}"
+key="${FAKE_KEY:-abcdefghijklmnopqrstuv}"
+port="${FAKE_PORT:-60001}"
+
+case "${scenario}" in
+    success)
+        printf 'remote banner\n'
+        if [ "${FAKE_SSH_CONNECTION:-}" ]; then
+            printf 'MOSH SSH_CONNECTION %s\n' "${FAKE_SSH_CONNECTION}"
+        fi
+        printf 'MOSH CONNECT %s %s\n' "${port}" "${key}"
+        ;;
+    no-connect)
+        printf 'remote output without control line\n'
+        ;;
+    malformed-port)
+        printf 'MOSH SSH_CONNECTION %s\n' "${FAKE_SSH_CONNECTION:-10.0.0.1 12345 10.0.0.2 22}"
+        printf 'MOSH CONNECT 70000 %s\n' "${key}"
+        ;;
+    malformed-key)
+        printf 'MOSH SSH_CONNECTION %s\n' "${FAKE_SSH_CONNECTION:-10.0.0.1 12345 10.0.0.2 22}"
+        printf 'MOSH CONNECT %s short-key\n' "${port}"
+        ;;
+    duplicate-connect)
+        printf 'MOSH SSH_CONNECTION %s\n' "${FAKE_SSH_CONNECTION:-10.0.0.1 12345 10.0.0.2 22}"
+        printf 'MOSH CONNECT %s %s\n' "${port}" "${key}"
+        printf 'MOSH CONNECT %s %s\n' "${port}" "${key}"
+        ;;
+    missing-remote-ip)
+        printf 'MOSH CONNECT %s %s\n' "${port}" "${key}"
+        ;;
+    server-failure)
+        printf 'mosh-server: command not found\n'
+        ;;
+    ssh-failure)
+        printf 'dbclient failure\n' >&2
+        exit 42
+        ;;
+    sleep)
+        trap 'exit 143' TERM
+        sleep 30
+        ;;
+    *)
+        printf 'unknown fake scenario: %s\n' "${scenario}" >&2
+        exit 99
+        ;;
+esac

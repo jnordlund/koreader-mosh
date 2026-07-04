@@ -1,0 +1,31 @@
+#!/bin/sh
+set -eu
+
+log_dir="${FAKE_LOG_DIR:?FAKE_LOG_DIR is required}"
+mkdir -p "${log_dir}"
+
+if [ "${1:-}" = "-c" ]; then
+    printf '%s\n' "${FAKE_COLORS:-8}"
+    exit 0
+fi
+
+{
+    for arg in "$@"; do
+        printf '[%s]\n' "$arg"
+    done
+    printf 'MOSH_KEY_PRESENT=%s\n' "$([ "${MOSH_KEY:-}" ] && printf yes || printf no)"
+    printf 'MOSH_PREDICTION_DISPLAY=%s\n' "${MOSH_PREDICTION_DISPLAY:-}"
+    printf 'MOSH_NO_TERM_INIT=%s\n' "${MOSH_NO_TERM_INIT:-}"
+    printf 'TERM=%s\n' "${TERM:-}"
+    printf 'TERMINFO=%s\n' "${TERMINFO:-}"
+    printf 'LC_CTYPE=%s\n' "${LC_CTYPE:-}"
+} > "${log_dir}/mosh-client.argv"
+
+if [ "${FAKE_CLIENT_SLEEP:-}" ]; then
+    trap 'exit 143' TERM
+    while :; do
+        sleep 1
+    done
+fi
+
+exit "${FAKE_CLIENT_EXIT:-0}"

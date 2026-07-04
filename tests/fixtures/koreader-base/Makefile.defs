@@ -1,0 +1,12 @@
+else ifeq ($(TARGET), kobo)
+	GLIBC_VERSION_MAX = 2.15
+else ifeq ($(TARGET), kobov4)
+	GLIBC_VERSION_MAX = 2.19
+else ifeq ($(TARGET), kobov5)
+	GLIBC_VERSION_MAX = 2.35
+endif
+
+UBUNTU_COMPAT_CFLAGS:=-fno-finite-math-only -fno-stack-protector -U_FORTIFY_SOURCE
+ARMV7_A8_ARCH:=-march=armv7-a -mtune=cortex-a8 -mfpu=neon -mthumb
+ARMV7_A9_ARCH:=-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mthumb
+ARMV7_A53_ARCH:=-march=armv7-a -mtune=cortex-a53 -mfpu=neon -mthumb

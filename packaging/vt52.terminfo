@@ -1,0 +1,10 @@
+# KOReader's terminal.koplugin currently exports TERM=vt52. This source is
+# intentionally small and mirrors the ncurses vt52 entry so the packaged
+# mosh-client can run `mosh-client -c` without a device-wide terminfo database.
+vt52|dec vt52,
+	cols#80, it#8, lines#24,
+	acsc=+h.k0affggolpnqprrss, bel=^G, clear=\EH\EJ, cr=^M,
+	cub1=\ED, cud1=\EB, cuf1=\EC,
+	cup=\EY%p1%' '%+%c%p2%' '%+%c, cuu1=\EA, ed=\EJ, el=\EK,
+	home=\EH, ht=^I, ind=^J, kbs=^H, kcub1=\ED, kcud1=\EB,
+	kcuf1=\EC, kcuu1=\EA, nel=^M^J, ri=\EI, rmacs=\EG, smacs=\EF,
