@@ -7,8 +7,8 @@ physical Kobo.
 - KOReader version: not recorded
 - KOReader install path: `/mnt/onboard/.adds/koreader`
 - Package artifact name and SHA-256:
-  `koreader-mosh-0.1.0-kobo.zip`,
-  `1ff37372706da0431a4e3f88f563730a721a0f2088c3033450814305342140fd`
+  `koreader-mosh-0.1.0-kobo.zip`; SHA-256 is published by CI as
+  `koreader-mosh-0.1.0-kobo.zip.sha256`
 - Target used (`kobo`, `kobov4`, `kobov5`): `kobo`
 - Plugin loads in KOReader: pass
 - Status screen shows launcher, `mosh-client`, terminfo and `dbclient` as ok: not recorded

@@ -23,8 +23,8 @@ The Kobo Clara family is expected to use the `kobo` target in current
 | KOReader version | Not recorded |
 | Target | `kobo` |
 | Package artifact | `koreader-mosh-0.1.0-kobo.zip` |
-| Package SHA-256 | `1ff37372706da0431a4e3f88f563730a721a0f2088c3033450814305342140fd` |
-| CI run | <https://github.com/jnordlund/koreader-mosh/actions/runs/28720011576> |
+| Package SHA-256 | Published next to the package as `koreader-mosh-0.1.0-kobo.zip.sha256` |
+| CI run | GitHub Actions run for the release commit |
 
 Verified behavior:
 
